@@ -1,0 +1,147 @@
+# Sistema de Autenticación con JWT en Spring Boot
+
+This repository is a basic template implementing an authentication system using JWT (JSON Web Token) in Spring Boot. The template is designed to be easily extendable and adaptable to any project that requires authentication and authorization using JWT.
+
+## Características
+
+- JWT Authentication: Implements the generation and validation of JWT tokens.
+- Registration and Login: Endpoints for user registration and login.
+- Route Protection: Routes protected by authorization filters that validate the JWT.
+- Role and Permission Management: Example roles that restrict access to certain routes.
+- Seguridad Spring Security: Configurado para trabajar de manera eficiente con JWT.
+
+## Tecnologías utilizadas
+
+- Spring Boot: Framework for building Java applications.
+- Spring Security: Security module for managing authentication and authorization.
+- JWT (JSON Web Tokens): Token-based authentication mechanism.
+- H2 Database: In-memory database for testing (can be replaced with another DB engine for production).
+- Maven: For dependency management.
+
+## Requirements
+
+- Java 17+
+- Maven
+
+## Installation
+
+1. Clone the repository
+
+```bash
+    git clone https://github.com/miguelanguai/jwt-spring-auth-template.git
+    cd jwt-spring-auth-template
+```
+
+2. Configure the database
+
+In the file `src/main/resources/application.properties`, you can configure the database of your choice. By default, the project uses H2, an in-memory database for development and testing.
+
+3. Install dependencies and build the project
+
+```bash
+    mvn clean install
+```
+
+4. Run the application
+
+```bash
+    mvn spring-boot:run
+```
+
+## Usage
+
+### Registration
+
+- Enpoint: `POST /register`
+- Description: Create a new user
+- Request Body:
+
+```JSON
+{
+    "firstName":"John",
+    "lastName":"Doe",
+    "username":"johndoe",
+    "mail":"johndoe@mail.com",
+    "password":"helloworld",
+    "role":"USER"
+}
+```
+
+### Login
+
+- Enpoint: `POST /login`
+- Description: Start a session
+- Request Body:
+
+```JSON
+{
+    "username":"johndoe",
+    "password":"helloworld"
+}
+```
+
+- Successful response:
+
+```JSON
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5c..."
+}
+```
+
+### Logout
+
+- Enpoint: `POST /user/signout`
+- Description: Terminate session
+- Headers: `Authorization: Bearer <JWT_TOKEN>`
+- Request Body:
+
+```JSON
+{
+    "username":"johndoe",
+    "password":"helloworld"
+}
+```
+
+### Get Entities
+
+- Enpoint: `GET /p/employee`
+- Description: Get all the employees
+
+### Create Entity
+
+- Enpoint: `PUT /u/employee`
+- Description: Create a new employee
+- Headers: `Authorization: Bearer <JWT_TOKEN>`
+- Request Body:
+
+```JSON
+{
+    "name":"Sarah";
+}
+```
+
+### Edit Employee
+
+- Enpoint: `POST /register`
+- Description: Edit an existing user
+- Headers: `Authorization: Bearer <JWT_TOKEN>`
+- Request Body:
+
+```JSON
+{
+    "name":"new name";
+}
+```
+
+## Customization
+
+- Routes: You can add more protected or public routes as needed in the controller.
+- Roles: Modify the role system in the User class and in the controllers to enforce more specific permissions.
+
+## Contributions
+
+Contributions are welcome. If you want to improve or extend this template's functionality, feel free to create a Pull Request or open an Issue.
+
+## License
+
+This project is licensed under the MIT License. You can find more details in the LICENSE file.
